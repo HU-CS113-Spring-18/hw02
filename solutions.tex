@@ -1,0 +1,262 @@
+%CS-113 S18 HW-2 Solutions
+%Released: 2-Feb-2018
+%Authors: Abdullah Zafar, Muhammad Imtiaz
+
+
+\documentclass[addpoints]{exam}
+
+% Header and footer.
+\pagestyle{headandfoot}
+\runningheadrule
+\runningfootrule
+\runningheader{CS 113 Discrete Mathematics}{Homework II}{Spring 2018}
+\runningfooter{}{Page \thepage\ of \numpages}{}
+\firstpageheader{}{}{}
+
+\boxedpoints
+\printanswers
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,graphicx,amsmath,hyperref,oz}
+\title{Habib University\\CS-113 Discrete Mathematics\\Spring 2018\\HW 2 Solutions}
+\author{} 
+\date{Released: 17th February, 2018}
+
+
+\begin{document}
+\maketitle
+
+\begin{questions}
+
+
+
+\question
+
+%Short Questions (25)
+
+\begin{parts}
+
+  
+  \part[5] Determine the domain, codomain and set of values for the following function to be 
+  \begin{subparts}
+  \subpart Partial 
+  
+  \subpart Total
+  \end{subparts}
+  
+  \begin{center}
+    $y=\sqrt{x}$
+  \end{center}
+
+  \begin{solution}
+  \begin{subparts}
+  \subpart $\mathbb{N} \rightarrow \mathbb{N}$ 
+  \subpart $\mathbb{R^+}\rightarrow \mathbb{R^+}$
+  
+
+  \end{subparts}
+    Note: There are other possible solutions.
+  \end{solution}
+  
+  \part[5] Explain whether $f$ is a function from the set of all bit strings to the set of integers if $f(S)$ is the smallest $i \in \mathbb{Z}$ such that the $i$th bit of S is 1 and $f(S) = 0$ when S is the empty string. 
+  
+  \begin{solution}
+     $f$ is a partial function defined over all bit strings that contain 1. It is not defined for 0*. 
+     
+     Note: The prevailing opinion is that partial functions are not functions. 
+  \end{solution}
+
+  \part[15] For $X,Y \in S$, explain why (or why not) the following define an equivalence relation on $S$:
+  \begin{subparts}
+    \subpart ``$X$ and $Y$ have been in class together"
+    \subpart ``$X$ and $Y$ rhyme"
+    \subpart ``$X$ is a subset of $Y$"
+  \end{subparts}
+
+  \begin{solution}
+  \begin{subparts}
+    \subpart Not equivalent, because not transitive. Just because X and Y have been in class together, and Y and Z have been in class together, does not necessitate X and Z have been in class together.
+
+    \subpart Equivalent. A word rhymes with itself (reflexive). If X rhymes with Y, then Y rhymes with X (symmetric). If X rhymes with Y and Y rhymes with Z, then X rhymes with Z (transitive).
+
+    \subpart Not equivalent, because asymmetric. If X is a subset of Y then it is not necessary that Y is a subset of X.
+    
+
+  \end{subparts}
+      Note: Anti-symmetry does not contradict equivalence, but the absence of symmetry does.
+  \end{solution}
+
+\end{parts}
+
+%Long questions (75)
+\question[15] Let $A = f^{-1}(B)$. Prove that $f(A) \subseteq B$.
+  \begin{solution}
+      
+    Note: The proof here relies on the existence of partial inverses. Specifically, the idea that an injective partial function may be inverted to an injective partial function (\href{https://en.wikipedia.org/wiki/Partial_function#Basic_concepts}{ref}). If the reader is disinclined towards the existence of partial inverses, then they may disregard part ii of the proof. Students are not expected to give a proof in terms of partial inverses either.
+  
+   Proof: Consider a bijective partial function $f^{-1}: B \pfun A$ on sets $A$ and $B$, such that $A = f^{-1}(B)$. There are two possible scenarios with regards to the domain of $f^{-1}$:
+   \begin{subparts}
+   \subpart $f^{-1}$  is defined for all elements in the domain (total function). If $f^{-1}$ is bijective, then so is $f : A \rightarrow B$. This implies that $f(A) = B$. 
+   \subpart $f^{-1}$  is undefined for some element(s) in the domain (partial inverse). Let $f^{-1}$ be undefined for $b \in B$. Then, the co-domain of $f: A \pfun B$ does not contain $b$. In other words, $b \not\in f(A)$. Therefore $f(A) \subset B$.
+   
+
+
+    \end{subparts}
+
+Combining (1) and (2), we conclude that $f(A) \subseteq B$. Q.E.D.
+
+  
+
+  \end{solution}
+
+\question[15] Consider $[n] = \{1,2,3,...,n\}$ where $n \in \mathbb{N}$. Let $A$ be the set of subsets of $[n]$ that have even size, and let $B$ be the set of subsets of $[n]$ that have odd size. Establish a bijection from $A$ to $B$, thereby proving $|A| = |B|$. (Such a bijection is suggested below for $n = 3$) 
+
+\begin{center}
+
+  \begin{tabular}{ |c || c | c | c |c |}
+    \hline
+ A & $\emptyset$ & $\{2,3\}$ & $\{1,3\}$ & $\{1,2\}$ \\ \hline
+ B & $\{3\}$ & $\{2\}$ & $\{1\}$ & $\{1,2,3\}$\\\hline
+\end{tabular}
+\end{center}
+
+  \begin{solution}
+  Given the sets $A,B \subset \mathcal{P}([n])$, here is a function that maps $A$ to $B$:
+  \[ 
+    f(a \in A)=
+    \begin{cases} 
+      a - \{n\}  & n \in a \\
+      a \cup \{n\} & n \not\in a \\      
+   \end{cases}
+ \]
+ 
+ Since $|a|$ is even, both $|a - \{n\}|$ and $|a \cup \{n\}|$ are odd. Therefore $f(a) \in B$, and $f(A) \subseteq B.$
+
+ To prove injectivity, consider elements $a_1,a_2 \in A$, such that $a_1 \not= a_2$. There are four possible scenarios with regards to the elements in $a_1$ and $a_2$:
+
+ \begin{subparts}
+ \subpart $n  \in a_1, a_2$, then $f(a_1) = a_1 - \{n\} \not= f(a_2) = a_2 - \{n\}$. Removing a common element from distinct sets preserves distinctness.
+
+ \subpart $n \not \in a_1,a_2$, then $f(a_1) = a_1 \cup \{n\} \not= f(a_2) = a_2 \cup \{n\}$. Adding a common element to distinct sets preserves distinctness.
+
+ \subpart $n \in a_1, n \not \in a_2$, then $f(a_1) = a - \{n\} \not= f(a_2) = a \cup \{n\}$. Sets differ over $n$.
+
+ \subpart $n \not \in a_1, n \in a_2$, then $f(a_1) = a \cup \{n\} \not= f(a_2) = a - \{n\}$. Sets differ over $n$.
+
+ \end{subparts}
+
+ Since in all cases $f(a_1) \not= f(a_2)$, $f$ is injective. 
+
+ To prove surjectivity, we reason about the cardinality of the sets. We know that the $A$ and $B$ divide the power set of $[n]$. Consider an element, $k \in [n]$, which divides $\mathcal{P}([n])$ as follows:
+
+ \begin{itemize}
+    \item $X_A \subseteq A$ that contains $k$, $Y_A \subseteq A$ that does not contain $k$.
+    
+    \item $X_b \subseteq B$ that contains $k$, $Y_B \subseteq B$ that does not contain $k$.
+ \end{itemize} 
+
+ The number of even-sized subsets containing $k$ is equal to the number of odd-sized subsets without $k$. Therefore $|X_A| = |Y_B|$. The number of odd-sized subsets containing k is equal to the number of even-sized subsets without $k$. Therefore $|X_B|=|Y_A|$. Combining the two equations we have $|A| = |X_A| + |X_B| = |Y_B| + |Y_A| = |B|$. 
+
+ Since $f : A \rightarrow B$ is injective, and $|A| = |B|$, then $f$ is surjective as well. Therefore, $f$ is bijective. Q.E.D. 
+
+  
+  \end{solution}
+  
+\question Mushrooms play a vital role in the biosphere of our planet. They also have recreational uses, such as in understanding the mathematical series below. A mushroom number, $M_n$, is a figurate number that can be represented in the form of a mushroom shaped grid of points, such that the number of points is the mushroom number. A mushroom consists of a stem and cap, while its height is the combined height of the two parts. Here is $M_5=23$:
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1.0]{m5_figurate.png}
+  \caption{Representation of $M_5$ mushroom}
+  \label{fig:mushroom_anatomy}
+\end{figure}
+
+We can draw the mushroom that represents $M_{n+1}$ recursively, for $n \geq 1$:
+\[ 
+    M_{n+1}=
+    \begin{cases} 
+      f(\textrm{Cap\_width}(M_n) + 1, \textrm{Stem\_height}(M_n) + 1, \textrm{Cap\_height}(M_n))  & n \textrm{ is even} \\
+      f(\textrm{Cap\_width}(M_n) + 1, \textrm{Stem\_height}(M_n) + 1, \textrm{Cap\_height}(M_n)+1) & n \textrm{ is odd}  \\      
+   \end{cases}
+\]
+
+Study the first five mushrooms carefully and make sure you can draw subsequent ones using the recurrence above.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics{mushroom_series.png}
+  \caption{Representation of $M_1,M_2,M_3,M_4,M_5$ mushrooms}
+  \label{fig:mushroom_series}
+\end{figure}
+
+  \begin{parts}
+    \part[15] Derive a closed-form for $M_n$ in terms of $n$.
+  \begin{solution}
+     \[ 
+    M_n=
+    \begin{cases} 
+      \frac{1}{8}(n+2)(3n+4) + 2(n-1)  & n \textrm{ is even} \\
+      \frac{1}{8}(n+1)(3n+5) + 2(n-1)  & n \textrm{ is odd} \\   
+   \end{cases}
+ \]
+  \end{solution}
+    \part[5] What is the total height of the $20$th mushroom in the series? 
+  \begin{solution}
+    The 20th mushroom has a height of 30 dots (cap height = 11, stem height = 19)
+  \end{solution}
+\end{parts}
+
+\question
+    The \href{https://en.wikipedia.org/wiki/Fibonacci_number}{Fibonacci series} is an infinite sequence of integers, starting with $1$ and $2$ and defined recursively after that, for the $n$th term in the array, as $F_n = F_{n-1} + F_{n-2}$. In this problem, we will count an interesting set derived from the Fibonacci recurrence.
+    
+The \href{http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibGen.html#section6.2}{Wythoff array} is an infinite 2D-array of integers where the $n$th row is formed from the Fibonnaci recurrence using starting numbers $n$ and $\left \lfloor{\phi\cdot (n+1)}\right \rfloor$ where $n \in \mathbb{N}$ and $\phi$ is the \href{https://en.wikipedia.org/wiki/Golden_ratio}{golden ratio} $1.618$ (3 sf).
+
+\begin{center}
+\begin{tabular}{c c c c c c c c}
+ \cellcolor{blue!25}1 & 2 & 3 & 5 & 8 & 13 & 21 & $\cdots$\\
+ 4 & \cellcolor{blue!25}7 & 11 & 18 & 29 & 47 & 76 & $\cdots$\\
+ 6 & 10 & \cellcolor{blue!25}16 & 26 & 42 & 68 & 110 & $\cdots$\\
+ 9 & 15 & 24 & \cellcolor{blue!25}39 & 63 & 102 & 165 & $\cdots$ \\
+ 12 & 20 & 32 & 52 & \cellcolor{blue!25}84 & 136 & 220 & $\cdots$ \\
+ 14 & 23 & 37 & 60 & 97 & \cellcolor{blue!25}157 & 254 & $\cdots$\\
+ 17 & 28 & 45 & 73 & 118 & 191 & \cellcolor{blue!25}309 & $\cdots$\\
+ $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & \color{blue}$\ddots$\\
+ 
+
+\end{tabular}
+\end{center}
+
+\begin{parts}
+  \part[10] To begin, prove that the Fibonacci series is countable.
+ 
+    \begin{solution}
+    
+    Note: This part assumes the set of naturals to be $N = \{1,2,3,...\}$. If the reader is disinclined towards it, they may as well shift the given mapping by 1.
+    
+    Proof: Here is a function $f$ from $\mathbb{N}$ to the Fibonacci series: $f(n \in \mathbb{N}) = F_n$ where $F_n$ stands for the $n$th Fibonacci number. 
+    
+    To prove injectivity, that is, $\forall n_1,n_2 \in \mathbb{N}(F_{n1} = F_{n2} \rightarrow n_1 = n_2)$: Assume $F_{n1} = F_{n2}$ for some $n_1,n_2 \in \mathbb{N}$. Since the Fibonacci series has no repeats, $n_1$ and $n_2$ must not be distinct. Hence $n_1 = n_2$.
+
+    To prove surjectivity, that is, $\forall y \in \textrm{Fibonacci Series}, \exists n \in \mathbb{N} (y = F_n )$: This is true by definition of $F_n$ being the $n$th Fibonacci number. 
+    
+    Since $f$ is both injective and surjective, it is bijective and the Fibonacci series is countable.
+
+   \end{solution}
+  
+  \part[15] Consider the Modified Wythoff as any array derived from the original, where each entry of the leading diagonal (marked in blue) of the original 2D-Array is replaced with an integer that does not occur in that row. Prove that the Modified Wythoff Array is countable. Q.E.D.
+
+  \begin{solution}
+   
+   Note: Our proof relies on the following lemma: “The union of countably many countable sets is countable”. It is left as exercise for the reader to verify this (the proof proceeds via strong induction, starting with the proof of the union of 2 countable sets being countable).
+
+   Proof: We have already presented a proof of countability for the first row of the Whythoff Array in part (a). The first row of the Modified Whythoff is also the same size. 
+
+   We can create a function mapping the Fibonacci series to row $n$ in the Modified Whythoff, by pairing $F_1$ with the first element in row $n$, $F_2$ with the second, and so on. Since each row is generated from the same recurrence formula as the Fibonacci and is strictly increasing (except for the modified number), our mapping is bijective. Hence, each row of the Modified Whythoff Array is countable. 
+
+   Furthermore, since each row is generated by the natural numbers (using starting number $n$ for the $n$th row), there are countably many of them. Since we have countably many countable rows, we invoke our previously stated lemma to complete the proof. Namely, the union of all rows of the Modified Whythoff Array, and hence the array itself, is countable. Q.E.D.
+
+  \end{solution}
+\end{parts}
+
+\end{questions}
+
+\end{document}
